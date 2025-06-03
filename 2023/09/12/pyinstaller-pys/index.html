@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Use pyinstaller to package multiple python files | SteCheng's Blog</title><meta name="author" content="Stephen Cheng"><meta name="copyright" content="Stephen Cheng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1. Using Spec FilesWhen you execute  pyinstaller options.. main.py  You can also create a spec file using this command:  pyi-makespec options [other scripts …]name.py  the first thing PyInstaller does">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Use pyinstaller to package multiple python files">
+<meta property="og:url" content="https://stephen0124.github.io/2023/09/12/pyinstaller-pys/index.html">
+<meta property="og:site_name" content="SteCheng&#39;s Blog">
+<meta property="og:description" content="1. Using Spec FilesWhen you execute  pyinstaller options.. main.py  You can also create a spec file using this command:  pyi-makespec options [other scripts …]name.py  the first thing PyInstaller does">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2023/08/15/XAI1SR7QjhiPdCm.png">
+<meta property="article:published_time" content="2023-09-12T02:23:00.000Z">
+<meta property="article:modified_time" content="2024-03-20T10:26:20.358Z">
+<meta property="article:author" content="Stephen Cheng">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/08/15/XAI1SR7QjhiPdCm.png"><link rel="shortcut icon" href="https://s2.loli.net/2023/08/15/qse8l9tnPOubBU1.png"><link rel="canonical" href="https://stephen0124.github.io/2023/09/12/pyinstaller-pys/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Use pyinstaller to package multiple python files',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-20 18:26:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/universe.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s2.loli.net/2023/08/15/hTEwHP93X16rjak.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2023/08/15/XAI1SR7QjhiPdCm.png')"><nav id="nav"><span id="blog-info"><a href="/" title="SteCheng's Blog"><span class="site-name">SteCheng's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Use pyinstaller to package multiple python files</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-09-12T02:23:00.000Z" title="Created 2023-09-12 10:23:00">2023-09-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-20T10:26:20.358Z" title="Updated 2024-03-20 18:26:20">2024-03-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Use pyinstaller to package multiple python files"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1-Using-Spec-Files"><a href="#1-Using-Spec-Files" class="headerlink" title="1. Using Spec Files"></a>1. Using Spec Files</h1><p>When you execute</p>
+<pre>
+pyinstaller <em>options..</em> main.py
+</pre>
+<p>You can also create a spec file using this command:</p>
+<pre>
+pyi-makespec <em>options</em> [other scripts …]name.py
+</pre>
+<p>the first thing PyInstaller does is to build a spec (specification) file main.spec. That file is stored in the <strong>–specpath</strong> directory, by default the current directory.</p>
+<p>The spec file tells PyInstaller how to process your script. It encodes the script names and most of the options you give to the command. The spec file is actually executable Python code. PyInstaller builds the app by executing the contents of the spec file.</p>
+<p>For many uses of PyInstaller you do not need to examine or modify the spec file. It is usually enough to give all the needed information (such as hidden imports) as options to the command and let it run.</p>
+<p>There are four cases where it is useful to modify the spec file:</p>
+<ul>
+<li>When you want to bundle data files with the app.</li>
+<li>When you want to include run-time libraries ( or files) that PyInstaller does not know about from any other source..dll.so</li>
+<li>When you want to add Python run-time options to the executable.</li>
+<li>When you want to create a multiprogram bundle with merged common modules.</li>
+</ul>
+<h1 id="2-Spec-File-Operation"><a href="#2-Spec-File-Operation" class="headerlink" title="2. Spec File Operation"></a>2. Spec File Operation</h1><p>After PyInstaller creates a spec file, or opens a spec file when one is given instead of a script, the command executes the spec file as code. Your bundled application is created by the execution of the spec file. The following is a shortened example of a spec file for a minimal, one-folder app:</p>
+<pre>
+block_cipher = None
+a = Analysis(['minimal.py'],
+         pathex=['/Developer/PItests/minimal'],
+         binaries=None,
+         datas=None,
+         hiddenimports=[],
+         hookspath=None,
+         runtime_hooks=None,
+         excludes=None,
+         cipher=block_cipher)
+pyz = PYZ(a.pure, a.zipped_data,
+         cipher=block_cipher)
+exe = EXE(pyz,... )
+coll = COLLECT(...)
+</pre>
+
+<h1 id="3-Adding-Data-Files"><a href="#3-Adding-Data-Files" class="headerlink" title="3. Adding Data Files"></a>3. Adding Data Files</h1><p>You can add your python files like</p>
+<pre>
+a = Analysis(['1.py','2.py',...],...)
+</pre>
+<p>And add your Resource files, provide a list that describes the files as the value of the argument to . The list of data files is a list of tuples. Each tuple has two values, both of which must be strings:</p>
+<ul>
+<li>The first string specifies the file or files as they are in this system now.</li>
+<li>The second specifies the name of the folder to contain the files at run-time.<pre>
+datas=[("resource", "resource"),...]
+</pre></li>
+</ul>
+<h1 id="4-Important-“pathex”"><a href="#4-Important-“pathex”" class="headerlink" title="4. Important “pathex”"></a>4. Important “pathex”</h1><p>A list of paths to search for imports (like using PYTHONPATH), including paths given by the <strong>–paths</strong> option.</p>
+<p>Please write here as many paths as possible.</p>
+<p>For example, my folder schema looks like</p>
+<pre>
+MyFolder
+    venv
+        Lib
+            site-packages
+        Scripts
+    main.py
+</pre>
+<p>The <em>venv</em> folder is a Python3.8.10 virtual environment. When you often encounter DLLs or module errors when packaging, try to add all the paths you can think of.</p>
+<pre>
+pathex=['.\MyFolder',
+    '.\MyFolder\venv\Scripts',
+    '.\MyFolder\venv\Lib\site-packages',
+    '.\MyFolder\venv\Lib\site-packages\PyQt5',
+    '.\MyFolder\venv\Lib\site-packages\PyQt5\Qt5\bin',
+    '\MyFolder\venv\Lib\site-packages\PyQt5\Qt5\plugins\platforms',
+    ],
+</pre>
+
+<h1 id="5-Window-Icon"><a href="#5-Window-Icon" class="headerlink" title="5. Window Icon"></a>5. Window Icon</h1><p>To avoid losing the icon in the upper left corner of the GUI window after packaging, you should change some codes.</p>
+<p>Place <em>“ico.png”</em> into the <em>“ico”</em> folder.</p>
+<p>Change icon path to the icon file directory in the exe runtime temporary directory.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">resource_path</span>(<span class="params">self, relative_path</span>):</span><br><span class="line">   <span class="keyword">if</span> <span class="built_in">hasattr</span>(sys, <span class="string">&#x27;_MEIPASS&#x27;</span>):</span><br><span class="line">       base_path = sys._MEIPASS	<span class="comment"># 只有通过exe运行时才会进入这个分支，它返回的是exe运行时的临时目录路径</span></span><br><span class="line">   <span class="keyword">else</span>:</span><br><span class="line">       base_path = os.path.abspath(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">   <span class="keyword">return</span> os.path.join(base_path, relative_path)</span><br></pre></td></tr></table></figure>
+<p>Set icon path.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">icon = self.resource_path(os.path.join(<span class="string">&quot;ico&quot;</span>, <span class="string">&quot;ico.png&quot;</span>))</span><br><span class="line">self.setWindowIcon(QtGui.QIcon(icon))</span><br></pre></td></tr></table></figure>
+<p>Add datas in the spec file.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datas=[(&quot;ico&quot;, &quot;ico&quot;)],</span><br></pre></td></tr></table></figure>
+<p>Run <em>pyinstaller</em> in Terminal in the last.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://stephen0124.github.io">Stephen Cheng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://stephen0124.github.io/2023/09/12/pyinstaller-pys/">https://stephen0124.github.io/2023/09/12/pyinstaller-pys/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2023/08/15/XAI1SR7QjhiPdCm.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/09/21/solve-Github-images-display-problem/" title="Solve the display-problem of Github PicBed"><img class="cover" src="https://s2.loli.net/2023/09/12/twNEIgi9xWXKZpQ.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Solve the display-problem of Github PicBed</div></div></a></div><div class="next-post pull-right"><a href="/2023/08/15/traj-dist/" title="Trajectory_distance"><img class="cover" src="https://s2.loli.net/2023/08/15/LByzG6KNfmHA5eu.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Trajectory_distance</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/03/26/01_Colab/" title="First time Google Colab --- MaskWearing YOLOv5 Test"><img class="cover" src="https://s2.loli.net/2023/09/12/2qUMFfjQgPwsVk9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-26</div><div class="title">First time Google Colab --- MaskWearing YOLOv5 Test</div></div></a></div><div><a href="/2023/10/19/Cal_OIF/" title="Calculate remote sensing image bands&#39; OIF"><img class="cover" src="https://s2.loli.net/2023/08/15/D1Pily5jqnXogxR.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-19</div><div class="title">Calculate remote sensing image bands&#39; OIF</div></div></a></div><div><a href="/2024/03/14/Cal_Polyline/" title="Calculate polyline&#39;s length"><img class="cover" src="https://s2.loli.net/2023/08/15/ZSPlV6kihIpH5mC.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-14</div><div class="title">Calculate polyline&#39;s length</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s2.loli.net/2023/08/15/hTEwHP93X16rjak.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Stephen Cheng</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Stephen0124"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Stephen0124" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Using-Spec-Files"><span class="toc-number">1.</span> <span class="toc-text">1. Using Spec Files</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Spec-File-Operation"><span class="toc-number">2.</span> <span class="toc-text">2. Spec File Operation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Adding-Data-Files"><span class="toc-number">3.</span> <span class="toc-text">3. Adding Data Files</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Important-%E2%80%9Cpathex%E2%80%9D"><span class="toc-number">4.</span> <span class="toc-text">4. Important “pathex”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-Window-Icon"><span class="toc-number">5.</span> <span class="toc-text">5. Window Icon</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/26/01_Colab/" title="First time Google Colab --- MaskWearing YOLOv5 Test"><img src="https://s2.loli.net/2023/09/12/2qUMFfjQgPwsVk9.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="First time Google Colab --- MaskWearing YOLOv5 Test"/></a><div class="content"><a class="title" href="/2024/03/26/01_Colab/" title="First time Google Colab --- MaskWearing YOLOv5 Test">First time Google Colab --- MaskWearing YOLOv5 Test</a><time datetime="2024-03-26T13:08:22.000Z" title="Created 2024-03-26 21:08:22">2024-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/14/Cal_Polyline/" title="Calculate polyline's length"><img src="https://s2.loli.net/2023/08/15/ZSPlV6kihIpH5mC.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Calculate polyline's length"/></a><div class="content"><a class="title" href="/2024/03/14/Cal_Polyline/" title="Calculate polyline's length">Calculate polyline's length</a><time datetime="2024-03-14T14:21:15.000Z" title="Created 2024-03-14 22:21:15">2024-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/29/Penduium/" title="Penduium"><img src="https://s2.loli.net/2024/03/13/xFnps8IuorQjbgy.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Penduium"/></a><div class="content"><a class="title" href="/2024/02/29/Penduium/" title="Penduium">Penduium</a><time datetime="2024-02-29T13:08:30.000Z" title="Created 2024-02-29 21:08:30">2024-02-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/19/Cal_OIF/" title="Calculate remote sensing image bands' OIF"><img src="https://s2.loli.net/2023/08/15/D1Pily5jqnXogxR.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Calculate remote sensing image bands' OIF"/></a><div class="content"><a class="title" href="/2023/10/19/Cal_OIF/" title="Calculate remote sensing image bands' OIF">Calculate remote sensing image bands' OIF</a><time datetime="2023-10-19T13:28:25.000Z" title="Created 2023-10-19 21:28:25">2023-10-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/21/solve-Github-images-display-problem/" title="Solve the display-problem of Github PicBed"><img src="https://s2.loli.net/2023/09/12/twNEIgi9xWXKZpQ.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Solve the display-problem of Github PicBed"/></a><div class="content"><a class="title" href="/2023/09/21/solve-Github-images-display-problem/" title="Solve the display-problem of Github PicBed">Solve the display-problem of Github PicBed</a><time datetime="2023-09-21T13:36:02.000Z" title="Created 2023-09-21 21:36:02">2023-09-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By Stephen Cheng</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">I wish you to become your own sun, no need to rely on who's light.<p><a target="_blank" href="https://hexo.io/"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://www.jsdelivr.com/"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr" title="本站使用JsDelivr为静态资源提供CDN加速"></a> &nbsp;<a target="_blank" href="https://vercel.com/ "><img src="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://vercel.com/ "><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&logo=Codio" title="本站采用双线部署，联通线路托管于Coding"></a>&nbsp;<a target="_blank" href="https://github.com/"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'Stephen0124/Blog_Comments')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme (theme) {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = theme === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+btf.addModeChange('utterances', utterancesTheme)
+
+if ('Utterances' === 'Utterances' || !false) {
+  if (false) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
