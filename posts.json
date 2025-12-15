@@ -1,0 +1,48 @@
+[   
+    {
+        "id": "traj-dist",
+        "title": "轨迹相似性计算",
+        "date": "2023-8-15",
+        "summary": "一个关于轨迹距离度量方法的 Python 包。",
+        "file": "posts/traj-dist.md",
+        "tags": ["Python", "Coding"],
+        "category": "技术"
+    },
+    {
+        "id": "welcome",
+        "title": "欢迎使用 Fuwari Static",
+        "date": "2020-10-25",
+        "summary": "这是一个纯静态、无构建工具的版本，完美适配 GitHub Pages。",
+        "file": "posts/welcome.md",
+        "tags": ["Fuwari", "Static", "Demo", "Life"],
+        "category": "生活"
+    },
+    {
+        "id": "markdown-test",
+        "title": "Markdown 测试",
+        "date": "2024-11-01",
+        "summary": "测试一下 Markdown 渲染。",
+        "file": "posts/markdown.md",
+        "tags": ["Markdown", "Coding"],
+        "category": "技术"
+    },
+    {
+        "id": "code-test",
+        "title": "代码显示测试",
+        "date": "2023-12-10",
+        "summary": "测试一下代码块的显示。",
+        "file": "posts/code.md",
+        "tags": ["Javascript", "Coding"],
+        "category": "技术"
+    },
+    {
+        "id": "about",
+        "title": "关于",
+        "date": "2025-01-01", 
+        "summary": "我的个人介绍",
+        "file": "posts/about.md",
+        "tags": [],
+        "category": null,
+        "hidden": true
+    }
+]
