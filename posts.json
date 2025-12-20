@@ -9,15 +9,6 @@
         "category": "技术"
     },
     {
-        "id": "welcome",
-        "title": "欢迎使用 Fuwari Static",
-        "date": "2020-10-25",
-        "summary": "这是一个纯静态、无构建工具的版本，完美适配 GitHub Pages。",
-        "file": "posts/welcome.md",
-        "tags": ["Fuwari", "Static", "Demo", "Life"],
-        "category": "生活"
-    },
-    {
         "id": "markdown-test",
         "title": "Markdown 测试",
         "date": "2024-11-01",
@@ -45,4 +36,5 @@
         "category": null,
         "hidden": true
     }
+
 ]
