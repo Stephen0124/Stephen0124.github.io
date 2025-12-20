@@ -40,6 +40,17 @@
     border-radius: 1rem !important;
 }
 
+/* 只有当 <li> 里面包含 checkbox 时，才去掉圆点和内边距 */
+.prose li:has(input[type="checkbox"]) {
+    list-style-type: none !important;
+    padding-left: 0 !important;
+}
+
+/* 移除专门针对这些项的 Tailwind 伪元素圆点 */
+.prose li:has(input[type="checkbox"])::marker {
+    content: none !important;
+}
+
 /* 美化复选框样式 */
 .prose input[type="checkbox"] {
     appearance: none; /* 去除浏览器默认样式 */
