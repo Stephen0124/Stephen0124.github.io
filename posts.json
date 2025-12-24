@@ -1,5 +1,14 @@
 [   
     {
+        "id": "uv-python",
+        "title": "Python 安装方案推荐",
+        "date": "2025-12-06",
+        "summary": "安装 Python 的最好方式也许就是不安装。",
+        "file": "posts/uv-python.md",
+        "tags": ["Python", "Coding"],
+        "category": "技术"
+    },
+    {
         "id": "traj-dist",
         "title": "轨迹相似性计算",
         "date": "2023-8-15",
@@ -15,7 +24,7 @@
         "summary": "测试一下 Markdown 渲染。",
         "file": "posts/markdown.md",
         "tags": ["Markdown", "Coding"],
-        "category": "技术"
+        "category": "测试"
     },
     {
         "id": "code-test",
@@ -24,7 +33,7 @@
         "summary": "测试一下代码块的显示。",
         "file": "posts/code.md",
         "tags": ["Javascript", "Coding"],
-        "category": "技术"
+        "category": "测试"
     },
     {
         "id": "about",
@@ -36,5 +45,4 @@
         "category": null,
         "hidden": true
     }
-
 ]
