@@ -40,13 +40,52 @@
     border-radius: 1rem !important;
 }
 
-/* 只有当 <li> 里面包含 checkbox 时，才去掉圆点和内边距 */
-.prose li:has(input[type="checkbox"]) {
+/* 设置目录跳转的预留空间 */
+h1, h2, h3, h4, h5, h6 { scroll-margin-top: 1rem; }
+
+/* 无序列表 (Unordered List) */
+.markdown-body ul {
+    list-style-type: disc !important; /* 强制显示实心圆点 */
+    padding-left: 2rem !important;    /* 留出左侧缩进空间 */
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* 有序列表 (Ordered List) */
+.markdown-body ol {
+    list-style-type: decimal !important; /* 强制显示数字序号 */
+    padding-left: 2rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* 列表项 */
+.markdown-body li {
+    display: list-item !important;    /* 确保标签以列表项形式渲染 */
+    margin-bottom: 0.25rem;
+}
+
+/* 针对包含复选框的列表项（任务列表） */
+/* 只要 li 里面有 checkbox，就去掉圆点 */
+.markdown-body li:has(input[type="checkbox"]) {
     list-style-type: none !important;
     padding-left: 0 !important;
 }
 
-/* 移除专门针对这些项的 Tailwind 伪元素圆点 */
-.prose li:has(input[type="checkbox"])::marker {
-    content: none !important;
+/* 兼容性补丁：针对一些不支持 :has 的旧版浏览器 */
+.markdown-body li input[type="checkbox"] {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* 确保普通的无序列表依然有圆点 */
+/* 这里排除了含有 checkbox 的 li */
+.markdown-body ul:not(:has(input[type="checkbox"])) {
+    list-style-type: disc !important;
+}
+
+/* 确保 GitHub 样式背景透明，不遮挡你的渐变底色 */
+.markdown-body {
+    background-color: transparent !important;
+    font-family: inherit !important;
 }

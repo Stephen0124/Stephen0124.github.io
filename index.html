@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css">
     <link rel="icon" href="assets\images\favicon.png" type="image/png">
     
     <script>
@@ -104,24 +105,15 @@
             </div>
         </aside>
 
-        <main class="w-full lg:w-3/4 min-h-[50vh] relative">
+        <main class="w-full min-w-0 lg:w-3/4 min-h-[50vh] relative">
             
-            <div id="post-list" class="grid gap-6 transition-all duration-500"></div>
+            <div id="post-list" class="grid gap-4 transition-all duration-500"></div>
 
             <div id="post-detail" class="hidden bg-white/90 backdrop-blur-xl rounded-3xl shadow-xl p-8 lg:p-12 border border-white/20 transition-all duration-500 fade-in-up">
                 <button onclick="exitPost()" class="mb-6 flex items-center gap-2 text-sm text-gray-500 hover:text-primary transition-colors">← 返回</button>
                 <h1 id="article-title" class="text-3xl md:text-4xl font-bold text-gray-800 mb-6"></h1>
                 <div id="article-meta" class="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-8 pb-8 border-b border-gray-100"></div>
-                <div id="article-content" class="prose prose-lg prose-blue max-w-none prose-img:rounded-2xl prose-headings:font-bold prose-pre:bg-[#0d1117] prose-pre:rounded-xl"></div>
-            </div>
-
-            <!-- 屏幕宽度小于 1400px(主体约1080px + TOC约240px) 将不显示 TOC 右侧边栏 -->
-            <div id="right-sidebar" class="hidden min-[1400px]:block absolute left-[96%] top-0 h-full ml-10 w-[240px]">
-                <div id="toc-container" class="sticky top-24 hidden opacity-0 transition-opacity duration-300">
-                    <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 pl-4 border-l-4 border-primary/20">目录</div>
-                    <nav id="toc-content" class="max-h-[70vh] overflow-y-auto scrollbar-none space-y-1">
-                        </nav>
-                </div>
+                <div id="article-content" class="markdown-body"></div>
             </div>
 
             <!-- 底部 Footer -->
@@ -130,6 +122,14 @@
             </footer>
 
         </main>
+
+        <!-- 屏幕宽度小于 1400px(主体约1080px + TOC约240px) 将不显示 TOC 右侧边栏 -->
+        <div id="right-sidebar" class="hidden min-[1400px]:block absolute left-full top-0 h-full w-64">
+            <div id="toc-container" class="sticky top-24 hidden opacity-0 transition-opacity duration-300">
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 pl-4 border-l-4 border-primary/20">目录</div>
+                <nav id="toc-content" class="max-h-[70vh] overflow-y-auto scrollbar-none space-y-1"></nav>
+            </div>
+        </div>
     </div>
 
     <script src="js/marked.min.js"></script>
@@ -138,6 +138,3 @@
     <script src="js/app.js"></script>
 </body>
 </html>
-
-
-
