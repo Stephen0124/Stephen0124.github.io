@@ -15,7 +15,7 @@
 
 <div class="flex flex-col items-center my-10 fade-in-up">
     <img src="https://avatars.githubusercontent.com/u/103046213?v=4" class="w-40 h-40 !rounded-full object-cover shadow-xl hover:rotate-12 transition-transform duration-500 mb-6">
-    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">👋 你好，我是 SteCheng</h2>
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">👋 你好，我是 Kyan</h2>
     <p class="text-gray-500 dark:text-gray-400 max-w-lg text-center">
         欢迎来到我的博客。这是一个纯静态网站，主要分享我的个人项目以及日常随记
     </p>
