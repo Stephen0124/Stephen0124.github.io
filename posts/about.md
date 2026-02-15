@@ -63,4 +63,4 @@
 如果你对本站的内容感兴趣，或者有更好的静态站自动化方案推荐，欢迎联系：
 
 - **Email**: <k7254017@gmail.com>
-- **Github**: [Stephen0124](https://github.com/Stephen0124)
+- **Github**: [Kyan0124](https://github.com/Kyan0124)
